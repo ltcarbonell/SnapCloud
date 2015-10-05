@@ -8,20 +8,48 @@
 
 /* Begin PBXBuildFile section */
 		2220957A1BC026E6002D98EA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222095791BC026E6002D98EA /* AppDelegate.swift */; };
-		2220957C1BC026E6002D98EA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2220957B1BC026E6002D98EA /* ViewController.swift */; };
 		2220957F1BC026E6002D98EA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2220957D1BC026E6002D98EA /* Main.storyboard */; };
 		222095811BC026E6002D98EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 222095801BC026E6002D98EA /* Assets.xcassets */; };
 		222095841BC026E6002D98EA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 222095821BC026E6002D98EA /* LaunchScreen.storyboard */; };
+		2220958D1BC027A9002D98EA /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2220958B1BC027A9002D98EA /* Bolts.framework */; settings = {ASSET_TAGS = (); }; };
+		2220958E1BC027A9002D98EA /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2220958C1BC027A9002D98EA /* Parse.framework */; settings = {ASSET_TAGS = (); }; };
+		222095901BC02806002D98EA /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2220958F1BC02806002D98EA /* AudioToolbox.framework */; };
+		222095921BC02819002D98EA /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 222095911BC02819002D98EA /* CFNetwork.framework */; };
+		222095941BC02829002D98EA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 222095931BC02829002D98EA /* CoreGraphics.framework */; };
+		222095961BC0282E002D98EA /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 222095951BC0282E002D98EA /* CoreLocation.framework */; };
+		222095981BC02833002D98EA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 222095971BC02833002D98EA /* QuartzCore.framework */; };
+		2220959A1BC02838002D98EA /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 222095991BC02838002D98EA /* Security.framework */; };
+		2220959C1BC0283D002D98EA /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2220959B1BC0283D002D98EA /* StoreKit.framework */; };
+		2220959E1BC0285A002D98EA /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2220959D1BC0285A002D98EA /* libsqlite3.tbd */; };
+		222095A01BC02860002D98EA /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2220959F1BC02860002D98EA /* libz.tbd */; };
+		222095A21BC0286C002D98EA /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 222095A11BC0286C002D98EA /* SystemConfiguration.framework */; };
+		222095A61BC032FE002D98EA /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222095A31BC032FE002D98EA /* LoginViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		222095A71BC032FE002D98EA /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222095A41BC032FE002D98EA /* ProfileViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		222095A81BC032FE002D98EA /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222095A51BC032FE002D98EA /* SignUpViewController.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		222095761BC026E6002D98EA /* SnapCloud.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SnapCloud.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		222095791BC026E6002D98EA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		2220957B1BC026E6002D98EA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		2220957E1BC026E6002D98EA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		222095801BC026E6002D98EA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		222095831BC026E6002D98EA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		222095851BC026E6002D98EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2220958B1BC027A9002D98EA /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
+		2220958C1BC027A9002D98EA /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		2220958F1BC02806002D98EA /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		222095911BC02819002D98EA /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		222095931BC02829002D98EA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		222095951BC0282E002D98EA /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		222095971BC02833002D98EA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		222095991BC02838002D98EA /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		2220959B1BC0283D002D98EA /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		2220959D1BC0285A002D98EA /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		2220959F1BC02860002D98EA /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		222095A11BC0286C002D98EA /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		222095A31BC032FE002D98EA /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		222095A41BC032FE002D98EA /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		222095A51BC032FE002D98EA /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +57,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				222095A21BC0286C002D98EA /* SystemConfiguration.framework in Frameworks */,
+				222095A01BC02860002D98EA /* libz.tbd in Frameworks */,
+				2220959E1BC0285A002D98EA /* libsqlite3.tbd in Frameworks */,
+				2220959C1BC0283D002D98EA /* StoreKit.framework in Frameworks */,
+				2220959A1BC02838002D98EA /* Security.framework in Frameworks */,
+				222095981BC02833002D98EA /* QuartzCore.framework in Frameworks */,
+				222095961BC0282E002D98EA /* CoreLocation.framework in Frameworks */,
+				222095941BC02829002D98EA /* CoreGraphics.framework in Frameworks */,
+				222095921BC02819002D98EA /* CFNetwork.framework in Frameworks */,
+				222095901BC02806002D98EA /* AudioToolbox.framework in Frameworks */,
+				2220958E1BC027A9002D98EA /* Parse.framework in Frameworks */,
+				2220958D1BC027A9002D98EA /* Bolts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -39,6 +79,16 @@
 			isa = PBXGroup;
 			children = (
 				222095781BC026E6002D98EA /* SnapCloud */,
+				222095A11BC0286C002D98EA /* SystemConfiguration.framework */,
+				2220959B1BC0283D002D98EA /* StoreKit.framework */,
+				222095991BC02838002D98EA /* Security.framework */,
+				222095971BC02833002D98EA /* QuartzCore.framework */,
+				222095951BC0282E002D98EA /* CoreLocation.framework */,
+				222095931BC02829002D98EA /* CoreGraphics.framework */,
+				222095911BC02819002D98EA /* CFNetwork.framework */,
+				2220958F1BC02806002D98EA /* AudioToolbox.framework */,
+				2220959F1BC02860002D98EA /* libz.tbd */,
+				2220959D1BC0285A002D98EA /* libsqlite3.tbd */,
 				222095771BC026E6002D98EA /* Products */,
 			);
 			sourceTree = "<group>";
@@ -55,11 +105,15 @@
 			isa = PBXGroup;
 			children = (
 				222095791BC026E6002D98EA /* AppDelegate.swift */,
-				2220957B1BC026E6002D98EA /* ViewController.swift */,
+				222095A31BC032FE002D98EA /* LoginViewController.swift */,
+				222095A41BC032FE002D98EA /* ProfileViewController.swift */,
+				222095A51BC032FE002D98EA /* SignUpViewController.swift */,
 				2220957D1BC026E6002D98EA /* Main.storyboard */,
 				222095801BC026E6002D98EA /* Assets.xcassets */,
 				222095821BC026E6002D98EA /* LaunchScreen.storyboard */,
 				222095851BC026E6002D98EA /* Info.plist */,
+				2220958B1BC027A9002D98EA /* Bolts.framework */,
+				2220958C1BC027A9002D98EA /* Parse.framework */,
 			);
 			path = SnapCloud;
 			sourceTree = "<group>";
@@ -134,8 +188,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2220957C1BC026E6002D98EA /* ViewController.swift in Sources */,
+				222095A61BC032FE002D98EA /* LoginViewController.swift in Sources */,
+				222095A71BC032FE002D98EA /* ProfileViewController.swift in Sources */,
 				2220957A1BC026E6002D98EA /* AppDelegate.swift in Sources */,
+				222095A81BC032FE002D98EA /* SignUpViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -248,6 +304,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/SnapCloud",
+				);
 				INFOPLIST_FILE = SnapCloud/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ltcarbonell.SnapCloud;
@@ -259,6 +319,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/SnapCloud",
+				);
 				INFOPLIST_FILE = SnapCloud/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ltcarbonell.SnapCloud;
