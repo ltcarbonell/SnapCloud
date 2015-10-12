@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2204B27B1BC5B2550035E08C /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2204B27A1BC5B2550035E08C /* CollectionViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 		2220957A1BC026E6002D98EA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222095791BC026E6002D98EA /* AppDelegate.swift */; };
 		2220957F1BC026E6002D98EA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2220957D1BC026E6002D98EA /* Main.storyboard */; };
 		222095811BC026E6002D98EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 222095801BC026E6002D98EA /* Assets.xcassets */; };
@@ -29,6 +30,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2204B27A1BC5B2550035E08C /* CollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		222095761BC026E6002D98EA /* SnapCloud.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SnapCloud.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		222095791BC026E6002D98EA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2220957E1BC026E6002D98EA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 		222095781BC026E6002D98EA /* SnapCloud */ = {
 			isa = PBXGroup;
 			children = (
+				2204B27A1BC5B2550035E08C /* CollectionViewCell.swift */,
 				222095791BC026E6002D98EA /* AppDelegate.swift */,
 				222095A31BC032FE002D98EA /* LoginViewController.swift */,
 				222095A41BC032FE002D98EA /* ProfileViewController.swift */,
@@ -188,6 +191,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2204B27B1BC5B2550035E08C /* CollectionViewCell.swift in Sources */,
 				222095A61BC032FE002D98EA /* LoginViewController.swift in Sources */,
 				222095A71BC032FE002D98EA /* ProfileViewController.swift in Sources */,
 				2220957A1BC026E6002D98EA /* AppDelegate.swift in Sources */,
@@ -349,6 +353,7 @@
 				2220958A1BC026E6002D98EA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

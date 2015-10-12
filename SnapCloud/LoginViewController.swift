@@ -35,13 +35,13 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func login(sender: AnyObject) {
-            // Show the signup or login screen
         if username.text != "" && password.text != "" {
             PFUser.logInWithUsernameInBackground(username.text!.lowercaseString, password:password.text!) {
                 (user: PFUser?, error: NSError?) -> Void in
                 if user != nil {
                     // Do stuff after successful login.
                     currentUser = PFUser.currentUser()
+                    print("logged in")
                     self.performSegueWithIdentifier("loginToProfile", sender: self)
                 } else {
                     // The login failed. Check error to see why.
