@@ -72,8 +72,10 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         let userPhoto = PFObject(className:"Images")
         userPhoto["username"] = currentUser!.username
         userPhoto["image"] = imageFile
-        userPhoto.saveInBackground()
-        
+        do { try userPhoto.save()
+        } catch {
+            print("error")
+        }
     }
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
@@ -104,9 +106,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         
     }
     
-    @IBAction func editAccount(sender: AnyObject) {
-        // bring up page to edit the account information
-    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

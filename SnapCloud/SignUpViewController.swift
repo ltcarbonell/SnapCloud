@@ -42,6 +42,7 @@ class SignUpViewController: UIViewController {
         else {
             let user = PFUser()
             user["name"] = name.text
+            //user["profilePicture"] = UIImage(named: "defaultProfilePic")
             user.email = email.text!.lowercaseString
             user.username = username.text!.lowercaseString
             user.password = password.text
