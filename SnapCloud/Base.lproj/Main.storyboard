@@ -356,8 +356,16 @@
                                 <animations/>
                                 <items>
                                     <navigationItem title="Add Friends" id="cyj-3z-1Ff">
-                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Kye-qs-bQ1"/>
-                                        <barButtonItem key="rightBarButtonItem" title="Item" systemItem="done" id="RS1-28-Su6"/>
+                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Kye-qs-bQ1">
+                                            <connections>
+                                                <action selector="cancelButton:" destination="t14-Cs-ZUa" id="T0J-5M-ghr"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Item" systemItem="done" id="RS1-28-Su6">
+                                            <connections>
+                                                <action selector="doneButton:" destination="t14-Cs-ZUa" id="7oV-wN-eEY"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>

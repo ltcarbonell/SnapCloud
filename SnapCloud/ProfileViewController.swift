@@ -35,7 +35,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         username.text = profileCurrentlyOpen!.username
         
         searchForImages()
-        
+        self.imageCollectionView.reloadData()
         
         
     }
@@ -53,6 +53,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                         if let imageData = imageData {
                             let image = UIImage(data:imageData)
                             self.images.append(image!)
+                            self.imageCollectionView.reloadData()
                         }
                     }
                 }
@@ -64,7 +65,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
         
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismissViewControllerAnimated(true, completion: {self.imageCollectionView.reloadData()})
         
         let imageData = UIImagePNGRepresentation(image)
         let imageFile = PFFile(name: currentUser!.username! + ".png", data:imageData!)
@@ -72,9 +73,17 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         let userPhoto = PFObject(className:"Images")
         userPhoto["username"] = currentUser!.username
         userPhoto["image"] = imageFile
-        do { try userPhoto.save()
-        } catch {
-            print("error")
+        userPhoto.saveInBackgroundWithBlock {
+                (success: Bool, error: NSError?) -> Void in
+                if (success) {
+                    // The object has been saved.
+                    print("PhotoAdded")
+                    self.images = []
+                    self.searchForImages()
+                } else {
+                    // There was a problem, check error.description
+                    
+                }
         }
     }
     
@@ -97,6 +106,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         picker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
         picker.allowsEditing = true
         self.presentViewController(picker, animated: true, completion: nil)
+        self.imageCollectionView.reloadData()
     }
     
     @IBAction func logout(sender: AnyObject) {

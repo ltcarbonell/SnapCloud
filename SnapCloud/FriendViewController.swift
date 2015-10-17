@@ -7,17 +7,31 @@
 //
 
 import UIKit
+import Parse
 
 class FriendViewController: UIViewController {
     
     
     @IBOutlet var friendTableView: UITableView!
+    
+    var friendsList: [PFObject]?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        searchForFriends()
     }
 
+    func searchForFriends() {
+        let query = PFQuery(className: "Friends")
+        query.whereKey("user", equalTo: (currentUser?.username)!)
+        do {
+            friendsList = try query.findObjects()
+        } catch {
+            print("error")
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -30,17 +44,23 @@ class FriendViewController: UIViewController {
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        if friendsList != nil {
+            return (friendsList?.count)!
+        }
+        return 0
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("friendCell", forIndexPath: indexPath)
 
         // Configure the cell...
-        cell.textLabel?.text = "Bobby"
-
+        let friend = friendsList![indexPath.row]
+        
+        cell.textLabel?.text = friend["friend"] as? String
         return cell
     }
+    
+    
 
     /*
     // Override to support conditional editing of the table view.
