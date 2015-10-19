@@ -15,6 +15,8 @@ class FriendViewController: UIViewController {
     @IBOutlet var friendTableView: UITableView!
     
     var friendsList: [PFObject]?
+    var selectedFriend: PFUser?
+    var selectedUsername: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +30,10 @@ class FriendViewController: UIViewController {
         do {
             friendsList = try query.findObjects()
         } catch {
-            print("error")
+
+            let alert = UIAlertController(title: "Error", message: "Unable to search users. Try again.", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
         }
     }
     
@@ -60,6 +65,30 @@ class FriendViewController: UIViewController {
         return cell
     }
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        
+        let selectedFriendObject = friendsList![indexPath.row]
+        let friendCell = tableView.cellForRowAtIndexPath(indexPath)
+        selectedUsername = friendCell!.textLabel!.text
+        print(selectedUsername)
+        selectedFriend = selectedFriendObject["friend"] as? PFUser
+        
+        let query = PFUser.query()
+        query!.whereKey("username", equalTo: selectedUsername!)
+        do {
+            selectedFriend = try query!.getFirstObject() as? PFUser
+            print("Found")
+            performSegueWithIdentifier("viewFriendProfile", sender: self)
+        } catch {
+            print("error")
+            let alert = UIAlertController(title: "Error", message: "Unable to load. Try again.", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
+        
+    }
+
     
 
     /*
@@ -97,14 +126,18 @@ class FriendViewController: UIViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "viewFriendProfile" {
+            let destination = segue.destinationViewController as! ProfileViewController
+            // Pass the selected object to the new view controller.
+            destination.isFriendProfile = true
+            destination.profileCurrentlyOpen = selectedFriend
+        }
     }
-    */
 
 }

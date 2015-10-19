@@ -125,6 +125,7 @@
                     </view>
                     <connections>
                         <outlet property="password" destination="lN1-nY-lmk" id="oFl-Bj-nRg"/>
+                        <outlet property="rememberMe" destination="B2l-Wz-Hvg" id="V5r-It-PyE"/>
                         <outlet property="username" destination="Gyg-LR-nvF" id="iSm-EJ-YK2"/>
                         <segue destination="NBt-5d-biH" kind="show" identifier="loginToProfile" id="82c-10-IYF"/>
                     </connections>
@@ -167,7 +168,7 @@
                                 <rect key="frame" x="20" y="94" width="560" height="28"/>
                                 <animations/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="28" id="Iwf-B0-cSo"/>
+                                    <constraint firstAttribute="height" constant="28" id="Agg-uK-PLY"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="26"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -180,18 +181,8 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uzA-EI-wra">
-                                <rect key="frame" x="249" y="159" width="102" height="30"/>
-                                <animations/>
-                                <state key="normal" title="Upload Picture">
-                                    <color key="titleColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="uploadPicture:" destination="NBt-5d-biH" eventType="touchUpInside" id="nI5-cf-TZm"/>
-                                </connections>
-                            </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="uWc-iL-jLy">
-                                <rect key="frame" x="20" y="197" width="560" height="383"/>
+                                <rect key="frame" x="20" y="221" width="560" height="359"/>
                                 <animations/>
                                 <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="HAH-pn-a50">
@@ -208,7 +199,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="i3i-4t-zWO">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="i3i-4t-zWO">
                                                     <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
                                                     <animations/>
                                                 </imageView>
@@ -217,6 +208,12 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <animations/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="i3i-4t-zWO" secondAttribute="bottom" id="2MG-yd-9oS"/>
+                                            <constraint firstItem="i3i-4t-zWO" firstAttribute="top" secondItem="jjj-TY-YrE" secondAttribute="top" id="azH-7o-jaH"/>
+                                            <constraint firstItem="i3i-4t-zWO" firstAttribute="leading" secondItem="jjj-TY-YrE" secondAttribute="leading" id="pCH-kr-blC"/>
+                                            <constraint firstAttribute="trailing" secondItem="i3i-4t-zWO" secondAttribute="trailing" id="s9r-R0-y0g"/>
+                                        </constraints>
                                         <connections>
                                             <outlet property="imageView" destination="i3i-4t-zWO" id="XMs-34-uWo"/>
                                         </connections>
@@ -227,30 +224,41 @@
                                     <outlet property="delegate" destination="NBt-5d-biH" id="ZDY-qJ-AUs"/>
                                 </connections>
                             </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uzA-EI-wra">
+                                <rect key="frame" x="249" y="159" width="102" height="30"/>
+                                <animations/>
+                                <state key="normal" title="Upload Picture">
+                                    <color key="titleColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="uploadPicture:" destination="NBt-5d-biH" eventType="touchUpInside" id="nI5-cf-TZm"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="cJS-5Y-3U4" firstAttribute="top" secondItem="f09-fh-Z5h" secondAttribute="bottom" constant="8" symbolic="YES" id="3KT-IP-ajr"/>
-                            <constraint firstItem="f09-fh-Z5h" firstAttribute="leading" secondItem="cJS-5Y-3U4" secondAttribute="leading" id="4nG-84-x2Y"/>
                             <constraint firstAttribute="trailing" secondItem="TyS-95-yGw" secondAttribute="trailing" id="8qj-A9-rlU"/>
-                            <constraint firstItem="uWc-iL-jLy" firstAttribute="leading" secondItem="cJS-5Y-3U4" secondAttribute="leading" id="9yj-eA-CPq"/>
                             <constraint firstItem="TyS-95-yGw" firstAttribute="top" secondItem="sVs-Bd-ESR" secondAttribute="bottom" id="ANT-WH-S4G"/>
-                            <constraint firstItem="uWc-iL-jLy" firstAttribute="top" secondItem="uzA-EI-wra" secondAttribute="bottom" constant="8" symbolic="YES" id="Ilp-nt-ixc"/>
+                            <constraint firstItem="cJS-5Y-3U4" firstAttribute="leading" secondItem="f09-fh-Z5h" secondAttribute="leading" id="BlW-J0-QZo"/>
+                            <constraint firstItem="cJS-5Y-3U4" firstAttribute="trailing" secondItem="f09-fh-Z5h" secondAttribute="trailing" id="D1L-uC-SHw"/>
+                            <constraint firstItem="uzA-EI-wra" firstAttribute="top" secondItem="cJS-5Y-3U4" secondAttribute="bottom" constant="8" symbolic="YES" id="Fqw-R7-8Cy"/>
+                            <constraint firstItem="f09-fh-Z5h" firstAttribute="top" secondItem="TyS-95-yGw" secondAttribute="bottom" constant="30" id="IGS-xS-bLI"/>
                             <constraint firstItem="uWc-iL-jLy" firstAttribute="leading" secondItem="mLb-Me-UUB" secondAttribute="leadingMargin" id="JED-Tx-WN9"/>
-                            <constraint firstItem="f09-fh-Z5h" firstAttribute="top" secondItem="TyS-95-yGw" secondAttribute="bottom" constant="30" id="Jdh-Yu-Wg2"/>
-                            <constraint firstItem="f09-fh-Z5h" firstAttribute="trailing" secondItem="cJS-5Y-3U4" secondAttribute="trailing" id="Jg0-Jw-9bE"/>
                             <constraint firstAttribute="bottom" secondItem="uWc-iL-jLy" secondAttribute="bottom" constant="20" symbolic="YES" id="KrC-em-FTC"/>
                             <constraint firstItem="TyS-95-yGw" firstAttribute="leading" secondItem="mLb-Me-UUB" secondAttribute="leading" id="PvL-tx-fPp"/>
-                            <constraint firstItem="uWc-iL-jLy" firstAttribute="trailing" secondItem="cJS-5Y-3U4" secondAttribute="trailing" id="TOC-hI-inI"/>
-                            <constraint firstItem="f09-fh-Z5h" firstAttribute="centerX" secondItem="TyS-95-yGw" secondAttribute="centerX" id="WZC-uA-h1l"/>
-                            <constraint firstItem="uzA-EI-wra" firstAttribute="top" secondItem="cJS-5Y-3U4" secondAttribute="bottom" constant="8" symbolic="YES" id="emh-co-yV3"/>
-                            <constraint firstItem="uzA-EI-wra" firstAttribute="centerX" secondItem="cJS-5Y-3U4" secondAttribute="centerX" id="niu-Kj-gQr"/>
+                            <constraint firstItem="cJS-5Y-3U4" firstAttribute="leading" secondItem="uWc-iL-jLy" secondAttribute="leading" id="SuQ-bV-7n4"/>
+                            <constraint firstItem="f09-fh-Z5h" firstAttribute="centerX" secondItem="TyS-95-yGw" secondAttribute="centerX" id="ibi-ud-BCZ"/>
+                            <constraint firstItem="cJS-5Y-3U4" firstAttribute="centerX" secondItem="uzA-EI-wra" secondAttribute="centerX" id="n5O-8K-ciz"/>
+                            <constraint firstItem="uWc-iL-jLy" firstAttribute="top" secondItem="uzA-EI-wra" secondAttribute="bottom" constant="32" id="oZt-bs-se0"/>
+                            <constraint firstItem="cJS-5Y-3U4" firstAttribute="trailing" secondItem="uWc-iL-jLy" secondAttribute="trailing" id="pGj-DW-MNq"/>
+                            <constraint firstItem="cJS-5Y-3U4" firstAttribute="top" secondItem="f09-fh-Z5h" secondAttribute="bottom" constant="8" symbolic="YES" id="wfb-ZB-oz3"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="fullName" destination="f09-fh-Z5h" id="ZsO-4Y-puL"/>
                         <outlet property="imageCollectionView" destination="uWc-iL-jLy" id="B2E-dQ-3cN"/>
+                        <outlet property="uploadButton" destination="uzA-EI-wra" id="B1n-ME-2Nb"/>
                         <outlet property="username" destination="cJS-5Y-3U4" id="wvs-ZF-Pra"/>
                         <segue destination="iyw-dO-ywW" kind="show" identifier="profileToLogin" id="jn3-Gd-Igy"/>
                     </connections>
@@ -277,7 +285,11 @@
                                 <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <items>
                                     <navigationItem title="Friends" id="keb-7Q-A9S">
-                                        <barButtonItem key="leftBarButtonItem" title="Profile" id="iP6-ED-Exv"/>
+                                        <barButtonItem key="leftBarButtonItem" title="Profile" id="iP6-ED-Exv">
+                                            <connections>
+                                                <segue destination="NBt-5d-biH" kind="show" id="SlL-kE-D5K"/>
+                                            </connections>
+                                        </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" systemItem="search" id="x3M-hd-J7q">
                                             <connections>
                                                 <segue destination="t14-Cs-ZUa" kind="show" identifier="friendsToFriendsList" id="Qon-nm-WD0"/>
@@ -331,8 +343,8 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="friendTableView" destination="XhQ-pU-pqj" id="DLd-h0-Fyi"/>
                         <segue destination="NBt-5d-biH" kind="show" identifier="friendsToProfile" id="s8c-lF-8VK"/>
+                        <segue destination="NBt-5d-biH" kind="show" identifier="viewFriendProfile" id="dKJ-0U-Hsf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rWP-Ja-flA" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -381,7 +393,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="561" height="89"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defaultProfilePic" translatesAutoresizingMaskIntoConstraints="NO" id="0gI-5t-ADf">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DefaultProfilePic" translatesAutoresizingMaskIntoConstraints="NO" id="0gI-5t-ADf">
                                                     <rect key="frame" x="0.0" y="0.0" width="89" height="89"/>
                                                     <animations/>
                                                     <constraints>
@@ -604,10 +616,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="defaultProfilePic" width="250" height="280"/>
+        <image name="DefaultProfilePic" width="250" height="280"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="6Qe-Xd-iYw"/>
-        <segue reference="9CK-QR-FJ8"/>
+        <segue reference="q7O-hk-bFE"/>
     </inferredMetricsTieBreakers>
 </document>

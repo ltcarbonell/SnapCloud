@@ -15,20 +15,22 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet var fullName: UILabel!
     @IBOutlet var username: UILabel!
     
-    
     @IBOutlet var imageCollectionView: UICollectionView!
+    @IBOutlet var uploadButton: UIButton!
     
-    var picker = UIImagePickerController()
-    let profileCurrentlyOpen = currentUser
+    var uploadPicker = UIImagePickerController()
+    var profileCurrentlyOpen = currentUser
     
     var images: [UIImage] = []
     var imageObjects: [PFObject] = []
     
+    var isFriendProfile = false
+    var friendUsername: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        picker.delegate = self
+        uploadPicker.delegate = self
         
         // Do any additional setup after loading the view.
         fullName.text = profileCurrentlyOpen!["name"] as? String
@@ -36,6 +38,10 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         
         searchForImages()
         self.imageCollectionView.reloadData()
+        
+        if isFriendProfile {
+            uploadButton.hidden = true
+        }
         
         
     }
@@ -63,9 +69,9 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         }
     }
     
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
+    func imagePickerController(uploadPicker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
+        self.dismissViewControllerAnimated(true, completion: nil)
         
-        self.dismissViewControllerAnimated(true, completion: {self.imageCollectionView.reloadData()})
         
         let imageData = UIImagePNGRepresentation(image)
         let imageFile = PFFile(name: currentUser!.username! + ".png", data:imageData!)
@@ -82,10 +88,14 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                     self.searchForImages()
                 } else {
                     // There was a problem, check error.description
+                    let alert = UIAlertController(title: "Error", message: error?.description, preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+                    self.presentViewController(alert, animated: true, completion: nil)
                     
                 }
         }
     }
+    
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 1
@@ -103,19 +113,18 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
     @IBAction func uploadPicture(sender: AnyObject) {
-        picker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
-        picker.allowsEditing = true
-        self.presentViewController(picker, animated: true, completion: nil)
-        self.imageCollectionView.reloadData()
+        uploadPicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        uploadPicker.allowsEditing = true
+        self.presentViewController(uploadPicker, animated: true, completion: nil)
     }
     
     @IBAction func logout(sender: AnyObject) {
         PFUser.logOut()
         currentUser = PFUser.currentUser() // this will now be nil
+        NSUserDefaults.standardUserDefaults().removeObjectForKey("username")
+        NSUserDefaults.standardUserDefaults().removeObjectForKey("password")
         self.performSegueWithIdentifier("profileToLogin", sender: self)
-        
     }
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

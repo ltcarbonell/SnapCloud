@@ -15,17 +15,15 @@ class LoginViewController: UIViewController {
 
     @IBOutlet var username: UITextField!
     @IBOutlet var password: UITextField!
+    @IBOutlet var rememberMe: UISwitch!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-        if currentUser != nil {
-            username.text = currentUser!.username
-            password.text = currentUser!.password
-        }
-        
+        username.text = NSUserDefaults.standardUserDefaults().stringForKey("username")
+        password.text = NSUserDefaults.standardUserDefaults().stringForKey("password")
+        rememberMe.setOn(NSUserDefaults.standardUserDefaults().boolForKey("rememberMe"), animated: true)
         
     }
 
@@ -41,11 +39,20 @@ class LoginViewController: UIViewController {
                 if user != nil {
                     // Do stuff after successful login.
                     currentUser = PFUser.currentUser()
-                    print("logged in")
+                    if self.rememberMe.on {
+                        NSUserDefaults.standardUserDefaults().setObject(self.username.text, forKey: "username")
+                        NSUserDefaults.standardUserDefaults().setObject(self.password.text, forKey: "password")
+                    } else {
+                        NSUserDefaults.standardUserDefaults().removeObjectForKey("username")
+                        NSUserDefaults.standardUserDefaults().removeObjectForKey("password")
+                    }
+                    NSUserDefaults.standardUserDefaults().setBool(self.rememberMe.on, forKey: "rememberMe")
                     self.performSegueWithIdentifier("loginToProfile", sender: self)
                 } else {
                     // The login failed. Check error to see why.
-                    print("Login failed. \(error)")
+                    let alert = UIAlertController(title: "Error", message: error?.description, preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+                    self.presentViewController(alert, animated: true, completion: nil)
                 }
             }
         }

@@ -34,7 +34,9 @@ class FriendsListViewController: UIViewController {
         do {
             usersList = try query!.findObjects() as? [PFUser]
         } catch {
-            print("error")
+            let alert = UIAlertController(title: "Error", message: "Unable to search, please try again.", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
         }
         
     }
@@ -110,6 +112,9 @@ class FriendsListViewController: UIViewController {
                         
                     } else {
                         // There was a problem, check error.description
+                        let alert = UIAlertController(title: "Error", message: error?.description, preferredStyle: UIAlertControllerStyle.Alert)
+                        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+                        self.presentViewController(alert, animated: true, completion: nil)
                     }
                 }
             }

@@ -31,13 +31,21 @@ class SignUpViewController: UIViewController {
     
     @IBAction func createAccount(sender: AnyObject) {
         if name.text == "" {
-            print("No valid name")
+            let alert = UIAlertController(title: "Error", message: "No name", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
         } else if email.text == "" {
-            print("no valid email")
+            let alert = UIAlertController(title: "Error", message: "No email address", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
         } else if username.text == "" {
-            print("no username")
+            let alert = UIAlertController(title: "Error", message: "No username", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
         } else if password.text != passwordVerify.text && password.text == "" {
-                print("no valid password")
+            let alert = UIAlertController(title: "Error", message: "Passwords Don't Match", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
         }
         else {
             let user = PFUser()
@@ -50,9 +58,10 @@ class SignUpViewController: UIViewController {
             user.signUpInBackgroundWithBlock {
                 (succeeded: Bool, error: NSError?) -> Void in
                 if let error = error {
-                    let errorString = error.userInfo["error"] as? NSString
                     // Show the errorString somewhere and let the user try again.
-                    print(errorString)
+                    let alert = UIAlertController(title: "Error", message: error.description, preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+                    self.presentViewController(alert, animated: true, completion: nil)
                 } else {
                     // Hooray! Let them use the app now.
                     PFUser.logInWithUsernameInBackground(user.username!.lowercaseString, password: user.password!)
