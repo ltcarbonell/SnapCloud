@@ -31,26 +31,25 @@ class SignUpViewController: UIViewController {
     
     @IBAction func createAccount(sender: AnyObject) {
         if name.text == "" {
-            let alert = UIAlertController(title: "Error", message: "No name", preferredStyle: UIAlertControllerStyle.Alert)
+            let alert = UIAlertController(title: "Error", message: "Enter name.", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
             self.presentViewController(alert, animated: true, completion: nil)
         } else if email.text == "" {
-            let alert = UIAlertController(title: "Error", message: "No email address", preferredStyle: UIAlertControllerStyle.Alert)
+            let alert = UIAlertController(title: "Error", message: "Enter email address.", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
             self.presentViewController(alert, animated: true, completion: nil)
         } else if username.text == "" {
-            let alert = UIAlertController(title: "Error", message: "No username", preferredStyle: UIAlertControllerStyle.Alert)
+            let alert = UIAlertController(title: "Error", message: "Enter username.", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
             self.presentViewController(alert, animated: true, completion: nil)
         } else if password.text != passwordVerify.text && password.text == "" {
-            let alert = UIAlertController(title: "Error", message: "Passwords Don't Match", preferredStyle: UIAlertControllerStyle.Alert)
+            let alert = UIAlertController(title: "Error", message: "Passwords Don't Match.", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
             self.presentViewController(alert, animated: true, completion: nil)
         }
         else {
             let user = PFUser()
             user["name"] = name.text
-            //user["profilePicture"] = UIImage(named: "defaultProfilePic")
             user.email = email.text!.lowercaseString
             user.username = username.text!.lowercaseString
             user.password = password.text
