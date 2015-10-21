@@ -68,6 +68,26 @@ class SignUpViewController: UIViewController {
                     self.performSegueWithIdentifier("signUpToProfile", sender: self)
                 }
             }
+            
+            let imageData = UIImagePNGRepresentation(UIImage(named: "DefaultProfilePic")!)
+            let imageFile = PFFile(name:"image.png", data:imageData!)
+            
+            let userPhoto = PFObject(className:"UserPhoto")
+            userPhoto["imageName"] = username.text!.lowercaseString
+            userPhoto["imageFile"] = imageFile
+            userPhoto.saveInBackgroundWithBlock{
+                (success: Bool, error: NSError?) -> Void in
+                if (success) {
+                    // The object has been saved.
+                    print("Added Photo")
+                    
+                } else {
+                    // There was a problem, check error.description
+                    let alert = UIAlertController(title: "Error", message: error?.description, preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+                    self.presentViewController(alert, animated: true, completion: nil)
+                }
+            }
         }
     }
 

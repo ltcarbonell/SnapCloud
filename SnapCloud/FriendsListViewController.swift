@@ -15,6 +15,7 @@ class FriendsListViewController: UIViewController {
     
     var friendsList: [PFObject]?
     var usersList: [PFUser]?
+    var usersProfilePic: [String: UIImage] = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +39,32 @@ class FriendsListViewController: UIViewController {
             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
             self.presentViewController(alert, animated: true, completion: nil)
         }
+        if usersList != nil  {
+            for user in usersList! {
+                let profileQuery = PFQuery(className: "UserPhoto")
+                profileQuery.whereKey("imageName", equalTo: user.username!)
+                do {
+                    let imageObject = try profileQuery.findObjects() as [PFObject]
+                    let imageObjectLast = imageObject.last
+                    let imageFile = imageObjectLast!["imageFile"] as! PFFile
+                    imageFile.getDataInBackgroundWithBlock {
+                        (imageData: NSData?, error: NSError?) -> Void in
+                        if error == nil {
+                            if let imageData = imageData {
+                                self.usersProfilePic[user.username!] = UIImage(data: imageData)
+                            }
+                        }
+                    }
+                } catch {
+                    let alert = UIAlertController(title: "Error", message: "Unable to grab photos. Check network connection.", preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+                    self.presentViewController(alert, animated: true, completion: nil)
+                }
+            }
+            self.friendsListTableView.reloadData()
+        }
+        
+        
         
     }
     
@@ -47,7 +74,9 @@ class FriendsListViewController: UIViewController {
         do {
             friendsList = try query.findObjects()
         } catch {
-            print("error")
+            let alert = UIAlertController(title: "Error", message: "Unable to grab friends. Check network connection.", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
         }
     }
     
@@ -77,7 +106,10 @@ class FriendsListViewController: UIViewController {
         
         cell.username.text = user.username
         cell.fullname.text = user["name"] as? String
-        cell.imageView?.image = user["profilePicture"] as? UIImage
+        
+        cell.profileImage.image = usersProfilePic[user.username!]! as UIImage
+        
+        
         cell.accessoryType = .None
         
         if friendsList != nil {

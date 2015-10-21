@@ -27,6 +27,8 @@
 		222095A61BC032FE002D98EA /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222095A31BC032FE002D98EA /* LoginViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		222095A71BC032FE002D98EA /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222095A41BC032FE002D98EA /* ProfileViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		222095A81BC032FE002D98EA /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222095A51BC032FE002D98EA /* SignUpViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		229715641BD7DA6100163918 /* ProfilePictureCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229715631BD7DA6100163918 /* ProfilePictureCollectionViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		229715661BD7DEFF00163918 /* ProfileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229715651BD7DEFF00163918 /* ProfileCollectionViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 		229E11491BCCA40400B19694 /* FriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E11481BCCA40400B19694 /* FriendViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		22D64DA71BCEDFB4003792BB /* FriendsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D64DA61BCEDFB4003792BB /* FriendsListViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		22D64DA91BCEE6A5003792BB /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D64DA81BCEE6A5003792BB /* UserTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
@@ -55,6 +57,8 @@
 		222095A31BC032FE002D98EA /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		222095A41BC032FE002D98EA /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		222095A51BC032FE002D98EA /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		229715631BD7DA6100163918 /* ProfilePictureCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePictureCollectionViewController.swift; sourceTree = "<group>"; };
+		229715651BD7DEFF00163918 /* ProfileCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileCollectionViewCell.swift; sourceTree = "<group>"; };
 		229E11481BCCA40400B19694 /* FriendViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendViewController.swift; sourceTree = "<group>"; };
 		22D64DA61BCEDFB4003792BB /* FriendsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsListViewController.swift; sourceTree = "<group>"; };
 		22D64DA81BCEE6A5003792BB /* UserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
@@ -112,6 +116,8 @@
 		222095781BC026E6002D98EA /* SnapCloud */ = {
 			isa = PBXGroup;
 			children = (
+				229715631BD7DA6100163918 /* ProfilePictureCollectionViewController.swift */,
+				229715651BD7DEFF00163918 /* ProfileCollectionViewCell.swift */,
 				2204B27A1BC5B2550035E08C /* CollectionViewCell.swift */,
 				229E11481BCCA40400B19694 /* FriendViewController.swift */,
 				22D64DA61BCEDFB4003792BB /* FriendsListViewController.swift */,
@@ -204,8 +210,10 @@
 				222095A61BC032FE002D98EA /* LoginViewController.swift in Sources */,
 				22D64DA71BCEDFB4003792BB /* FriendsListViewController.swift in Sources */,
 				222095A71BC032FE002D98EA /* ProfileViewController.swift in Sources */,
+				229715661BD7DEFF00163918 /* ProfileCollectionViewCell.swift in Sources */,
 				22D64DA91BCEE6A5003792BB /* UserTableViewCell.swift in Sources */,
 				2220957A1BC026E6002D98EA /* AppDelegate.swift in Sources */,
+				229715641BD7DA6100163918 /* ProfilePictureCollectionViewController.swift in Sources */,
 				222095A81BC032FE002D98EA /* SignUpViewController.swift in Sources */,
 				229E11491BCCA40400B19694 /* FriendViewController.swift in Sources */,
 			);

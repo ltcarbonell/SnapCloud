@@ -30,7 +30,6 @@ class FriendViewController: UIViewController {
         do {
             friendsList = try query.findObjects()
         } catch {
-
             let alert = UIAlertController(title: "Error", message: "Unable to search users. Try again.", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
             self.presentViewController(alert, animated: true, completion: nil)

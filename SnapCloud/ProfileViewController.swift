@@ -18,6 +18,10 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet var imageCollectionView: UICollectionView!
     @IBOutlet var uploadButton: UIButton!
     
+    @IBOutlet var profilePicture: UIImageView!
+    @IBOutlet var changeProfilePictureButton: UIButton!
+    
+    
     var uploadPicker = UIImagePickerController()
     var profileCurrentlyOpen = currentUser
     
@@ -41,12 +45,34 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         
         if isFriendProfile {
             uploadButton.hidden = true
+            changeProfilePictureButton.hidden = true
+            
         }
         
         
     }
     
     func searchForImages() {
+        let profileQuery = PFQuery(className: "UserPhoto")
+        profileQuery.whereKey("imageName", equalTo: profileCurrentlyOpen!.username!)
+            do {
+                let imageObject = try profileQuery.findObjects() as [PFObject]
+                let imageObjectLast = imageObject.last
+                let imageFile = imageObjectLast!["imageFile"] as! PFFile
+                imageFile.getDataInBackgroundWithBlock {
+                    (imageData: NSData?, error: NSError?) -> Void in
+                    if error == nil {
+                        if let imageData = imageData {
+                            self.profilePicture.image = UIImage(data: imageData)
+                        }
+                    }
+                }
+            } catch {
+                let alert = UIAlertController(title: "Error", message: "Unable to grab photos. Check network connection.", preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+                self.presentViewController(alert, animated: true, completion: nil)
+        }
+        
         let query = PFQuery(className:"Images")
         query.whereKey("username", equalTo: profileCurrentlyOpen!.username! )
         do {
@@ -65,7 +91,9 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                 }
             }
         } catch {
-            print("nope")
+            let alert = UIAlertController(title: "Error", message: "Unable to grab photos. Check network connection.", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
         }
     }
     
