@@ -15,15 +15,56 @@ class FriendViewController: UIViewController {
     @IBOutlet var friendTableView: UITableView!
     
     var friendsList: [PFObject]?
+    var usersList: [PFUser]?
     var selectedFriend: PFUser?
     var selectedUsername: String?
+    var selectedProfilePic: [String: UIImage] = [:]
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        searchForUsers()
         searchForFriends()
+        
     }
 
+    func searchForUsers() {
+        let query = PFUser.query()
+        query!.whereKey("username", notEqualTo: currentUser!.username!)
+        do {
+            usersList = try query!.findObjects() as? [PFUser]
+        } catch {
+            let alert = UIAlertController(title: "Error", message: "Unable to search, please try again.", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
+        if usersList != nil  {
+            for user in usersList! {
+                let profileQuery = PFQuery(className: "UserPhoto")
+                profileQuery.whereKey("imageName", equalTo: user.username!)
+                do {
+                    let imageObject = try profileQuery.findObjects() as [PFObject]
+                    let imageObjectLast = imageObject.last
+                    let imageFile = imageObjectLast!["imageFile"] as! PFFile
+                    imageFile.getDataInBackgroundWithBlock {
+                        (imageData: NSData?, error: NSError?) -> Void in
+                        if error == nil {
+                            if let imageData = imageData {
+                                self.selectedProfilePic[user.username!] = UIImage(data: imageData)
+                            }
+                        }
+                    }
+                } catch {
+                    let alert = UIAlertController(title: "Error", message: "Unable to grab photos. Check network connection.", preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+                    self.presentViewController(alert, animated: true, completion: nil)
+                }
+            }
+            self.friendTableView.reloadData()
+        }
+    }
+    
+    
     func searchForFriends() {
         let query = PFQuery(className: "Friends")
         query.whereKey("user", equalTo: (currentUser?.username)!)
@@ -55,12 +96,40 @@ class FriendViewController: UIViewController {
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("friendCell", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("friendListCell", forIndexPath: indexPath) as! UserTableViewCell
 
         // Configure the cell...
         let friend = friendsList![indexPath.row]
+        let selectedFriendUsername = friend["friend"] as? String
+        if selectedProfilePic[selectedFriendUsername!] != nil {
+            cell.profileImage.image = selectedProfilePic[selectedFriendUsername!]! as UIImage
+        } else {
+            cell.profileImage.image = UIImage(named: "DefaultProfilePic")
+        }
         
-        cell.textLabel?.text = friend["friend"] as? String
+        
+        
+        selectedUsername = friend["friend"] as? String
+        let selectedFriendObject = friendsList![indexPath.row]
+        selectedFriend = selectedFriendObject["friend"] as? PFUser
+        let query = PFUser.query()
+        
+        query!.whereKey("username", equalTo: selectedUsername!)
+        do {
+            selectedFriend = try query!.getFirstObject() as? PFUser
+            print("Found")
+            cell.fullname.text = selectedFriend!["name"] as? String
+            
+        } catch {
+            print("error")
+            let alert = UIAlertController(title: "Error", message: "Unable to load. Try again.", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
+        
+        
+        cell.username.text = selectedUsername
+        cell.fullname.text = selectedFriend?["name"] as? String
         return cell
     }
     
@@ -68,9 +137,8 @@ class FriendViewController: UIViewController {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
         let selectedFriendObject = friendsList![indexPath.row]
-        let friendCell = tableView.cellForRowAtIndexPath(indexPath)
-        selectedUsername = friendCell!.textLabel!.text
-        print(selectedUsername)
+        let friendCell = tableView.cellForRowAtIndexPath(indexPath) as! UserTableViewCell
+        selectedUsername = friendCell.username.text
         selectedFriend = selectedFriendObject["friend"] as? PFUser
         
         let query = PFUser.query()

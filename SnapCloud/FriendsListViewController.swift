@@ -16,6 +16,7 @@ class FriendsListViewController: UIViewController {
     var friendsList: [PFObject]?
     var usersList: [PFUser]?
     var usersProfilePic: [String: UIImage] = [:]
+    var selectedFriend: PFUser?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -107,7 +108,11 @@ class FriendsListViewController: UIViewController {
         cell.username.text = user.username
         cell.fullname.text = user["name"] as? String
         
-        cell.profileImage.image = usersProfilePic[user.username!]! as UIImage
+        if usersProfilePic[user.username!] != nil {
+            cell.profileImage.image = usersProfilePic[user.username!]! as UIImage
+        } else {
+            cell.profileImage.image = UIImage(named: "DefaultProfilePic")
+        }
         
         
         cell.accessoryType = .None
@@ -116,7 +121,6 @@ class FriendsListViewController: UIViewController {
             for friendRelation in friendsList! {
                 let friend = friendRelation["friend"] as! String
                 let user = cell.username.text!
-                print(friend, user)
                 if friend == user {
                     cell.accessoryType = .Checkmark
                 }
@@ -141,7 +145,6 @@ class FriendsListViewController: UIViewController {
                     if (success) {
                         // The object has been saved.
                         print("Added Friend \(selectedCell!.username.text!)")
-                        
                     } else {
                         // There was a problem, check error.description
                         let alert = UIAlertController(title: "Error", message: error?.description, preferredStyle: UIAlertControllerStyle.Alert)
@@ -150,6 +153,23 @@ class FriendsListViewController: UIViewController {
                     }
                 }
             }
+        }
+        
+        let alert = UIAlertController(title: "Added Friend", message: "Successfully added \(selectedCell!.fullname.text!)", preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "Go to page.", style: UIAlertActionStyle.Default, handler: nil))
+        self.presentViewController(alert, animated: true, completion: nil)
+        
+        let query = PFUser.query()
+        query!.whereKey("username", equalTo: selectedCell!.username.text!)
+        do {
+            selectedFriend = try query!.getFirstObject() as? PFUser
+            print("Found")
+            performSegueWithIdentifier("friendListToFriendProfile", sender: self)
+        } catch {
+            print("error")
+            let alert = UIAlertController(title: "Error", message: "Unable to load. Try again.", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
         }
     }
     
@@ -165,12 +185,16 @@ class FriendsListViewController: UIViewController {
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    //override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+         //Get the new view controller using segue.destinationViewController.
+        if segue.identifier == "friendListToFriendProfile" {
+            let destination = segue.destinationViewController as! ProfileViewController
+            // Pass the selected object to the new view controller.
+            destination.isFriendProfile = true
+            destination.profileCurrentlyOpen = selectedFriend
+        }
         
-        
-    //}
+    }
     
 
 }

@@ -10,7 +10,7 @@ import UIKit
 import Parse
 
 
-class SignUpViewController: UIViewController {
+class SignUpViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet var name: UITextField!
     @IBOutlet var email: UITextField!
@@ -90,6 +90,11 @@ class SignUpViewController: UIViewController {
             }
         }
     }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
 
     /*
     // MARK: - Navigation

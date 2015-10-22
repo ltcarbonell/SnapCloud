@@ -11,10 +11,12 @@ import Parse
 
 private let reuseIdentifier = "profilePicCell"
 
-class ProfilePictureCollectionViewController: UICollectionViewController {
+class ProfilePictureCollectionViewController: UIViewController, UICollectionViewDelegate {
 
     var images: [UIImage] = []
     var imageObjects: [PFObject] = []
+    
+    @IBOutlet var collectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,16 +75,16 @@ class ProfilePictureCollectionViewController: UICollectionViewController {
 
     // MARK: UICollectionViewDataSource
 
-    override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 1
     }
 
 
-    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return images.count
     }
 
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! ProfileCollectionViewCell
         print(self.images[indexPath.row])
         cell.imageView.image = self.images[indexPath.row]
@@ -92,7 +94,7 @@ class ProfilePictureCollectionViewController: UICollectionViewController {
 
     // MARK: UICollectionViewDelegate
 
-    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         collectionView.deselectItemAtIndexPath(indexPath, animated: true)
         
         let selectedCell = collectionView.cellForItemAtIndexPath(indexPath) as? ProfileCollectionViewCell
@@ -109,6 +111,9 @@ class ProfilePictureCollectionViewController: UICollectionViewController {
                 if (success) {
                     // The object has been saved.
                     print("Added Photo \(selectedCell!.imageView.image)")
+                    let alert = UIAlertController(title: "Photo Changed", message: "Your profile picture has successfully been changed.", preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+                    self.presentViewController(alert, animated: true, completion: nil)
                     
                 } else {
                     // There was a problem, check error.description
@@ -117,7 +122,6 @@ class ProfilePictureCollectionViewController: UICollectionViewController {
                     self.presentViewController(alert, animated: true, completion: nil)
                 }
             }
-            performSegueWithIdentifier("profilePictureToProfile", sender: self)
         }
     }
     

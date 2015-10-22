@@ -10,7 +10,7 @@ import UIKit
 import Parse
 
 
-class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
     @IBOutlet var fullName: UILabel!
     @IBOutlet var username: UILabel!
@@ -34,45 +34,52 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        profilePicture.layer.borderWidth = 1.0
+        profilePicture.layer.masksToBounds = false
+        profilePicture.layer.borderColor = UIColor.whiteColor().CGColor
+        profilePicture.layer.cornerRadius = profilePicture.frame.size.width/2
+        profilePicture.clipsToBounds = true
+        
         uploadPicker.delegate = self
         
         // Do any additional setup after loading the view.
         fullName.text = profileCurrentlyOpen!["name"] as? String
         username.text = profileCurrentlyOpen!.username
         
+        searchForProfilePicture()
         searchForImages()
-        self.imageCollectionView.reloadData()
-        
+    
         if isFriendProfile {
             uploadButton.hidden = true
             changeProfilePictureButton.hidden = true
-            
         }
-        
-        
     }
     
-    func searchForImages() {
+    func searchForProfilePicture() {
         let profileQuery = PFQuery(className: "UserPhoto")
         profileQuery.whereKey("imageName", equalTo: profileCurrentlyOpen!.username!)
+        do {
+            let imageObject = try profileQuery.findObjects() as [PFObject]
+            let imageObjectLast = imageObject.last
+            let imageFile = imageObjectLast!["imageFile"] as! PFFile
+            var imageData: NSData
+            
             do {
-                let imageObject = try profileQuery.findObjects() as [PFObject]
-                let imageObjectLast = imageObject.last
-                let imageFile = imageObjectLast!["imageFile"] as! PFFile
-                imageFile.getDataInBackgroundWithBlock {
-                    (imageData: NSData?, error: NSError?) -> Void in
-                    if error == nil {
-                        if let imageData = imageData {
-                            self.profilePicture.image = UIImage(data: imageData)
-                        }
-                    }
-                }
+                imageData = try imageFile.getData()
+                self.profilePicture.image = UIImage(data: imageData)
             } catch {
                 let alert = UIAlertController(title: "Error", message: "Unable to grab photos. Check network connection.", preferredStyle: UIAlertControllerStyle.Alert)
                 alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
                 self.presentViewController(alert, animated: true, completion: nil)
+            }
+        } catch {
+            let alert = UIAlertController(title: "Error", message: "Unable to grab photos. Check network connection.", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
         }
-        
+    }
+    
+    func searchForImages() {
         let query = PFQuery(className:"Images")
         query.whereKey("username", equalTo: profileCurrentlyOpen!.username! )
         do {
@@ -100,7 +107,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     func imagePickerController(uploadPicker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
         self.dismissViewControllerAnimated(true, completion: nil)
         
-        
         let imageData = UIImagePNGRepresentation(image)
         let imageFile = PFFile(name: currentUser!.username! + ".png", data:imageData!)
         
@@ -108,19 +114,18 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         userPhoto["username"] = currentUser!.username
         userPhoto["image"] = imageFile
         userPhoto.saveInBackgroundWithBlock {
-                (success: Bool, error: NSError?) -> Void in
-                if (success) {
-                    // The object has been saved.
-                    print("PhotoAdded")
-                    self.images = []
-                    self.searchForImages()
-                } else {
-                    // There was a problem, check error.description
-                    let alert = UIAlertController(title: "Error", message: error?.description, preferredStyle: UIAlertControllerStyle.Alert)
-                    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
-                    self.presentViewController(alert, animated: true, completion: nil)
-                    
-                }
+            (success: Bool, error: NSError?) -> Void in
+            if (success) {
+                // The object has been saved.
+                print("PhotoAdded")
+                self.images = []
+                self.searchForImages()
+            } else {
+                // There was a problem, check error.description
+                let alert = UIAlertController(title: "Error", message: error?.description, preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+                self.presentViewController(alert, animated: true, completion: nil)
+            }
         }
     }
     
@@ -158,6 +163,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
     
     /*
     // MARK: - Navigation
